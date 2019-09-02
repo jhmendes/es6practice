@@ -1,26 +1,26 @@
-////////////////////////////////Lecture: let and const
+/****** LECTURE: Let and Const ******/
 
 
-//ES5
-/*
+//ES5 variables are FUNCTION scoped
+
 var name5 = 'John Mendes';
 var age5 = 31;
 name5 = 'John Stark';
 console.log(name5);
 
-// //ES6
+//ES6 variables are BLOCK scoped
 const name6 = 'John Mendes';
 let age6 = 31;
 name6 = 'John Start';
 console.log(name6);
-*/
+
 
 /*Var variables are function scoped whereas const/let variables
 are block scoped
 */
 
-/*
-//ES5
+
+// ES5
 function driversLicense5(passedTest) {
     if (passedTest) {
         console.log(firstName);
@@ -40,15 +40,15 @@ function driversLicense6(passedTest) {
     const yearOfBirth = 1987;
 
     if (passedTest) {
-         firstName = 'John';
+        firstName = 'John';
     }
     console.log(firstName + ', born in ' + yearOfBirth);
-    
+
 }
 
 driversLicense6(true);
 
-//let and const are BLOCK { } scoped, important!
+//let and const are BLOCK { } scoped
 
 let i = 23;
 
@@ -58,7 +58,7 @@ for (let i = 0; i < 5; i++) {
 
 console.log(i);
 
-//i doesn't change in the for loop because its BLOCK scoped
+i doesn't change in the for loop because its BLOCK scoped
 
 var i = 23;
 
@@ -66,38 +66,36 @@ for (var i = 0; i < 5; i++) {
     console.log(i);
 }
 
-console.log(i); //var i is not block scoped, so the var i is reassigned
+// console.log(i); //var i is not block scoped, so the var i is reassigned
 //then runs through the loop, incremented to 5 at the end, then printed to console
-*/
 
 
 
 
-////////////////////////////////Lecture: Blocks and IIFEs
+/****** LECTURE:  Blocks and IIFEs ******/
 
 //ES6
-/*
+
+// Const/Let are block scoped so this creates data privacy instead of using an IFFE
 {
     const a = 1;
     let b = 2;
     var c = 3;
 }
 
-// console.log(a + b);
+console.log(a + b);
 console.log(c);
 
 //ES5
-(function() {
-    var c = 3;
-})();
+(function() { var c = 3;})();
 
-// console.log(c);
-*/
+console.log(c);
 
 
-////////////////////////////////Lecture: Strings
 
-/*
+/****** LECTURE: Strings in ES6 ******/
+
+
 let firstName = 'John';
 let lastName = 'Mendes';
 const yearOfBirth = 1987;
@@ -114,7 +112,7 @@ calcAge(yearOfBirth) + ' years old.');
 
 //ES6
 
-//template Literals
+//template literals
 
 console.log(`This is ${firstName} ${lastName} and he 
 was born in ${yearOfBirth}. Today, he is 
@@ -133,12 +131,12 @@ console.log(n.includes('oh'));
 console.log(`${firstName} `.repeat(5));
 
 
-*/
 
 
-////////////////////////////////Lecture: Arrow functions
 
-/*
+/****** LECTURE: Arrow Functions ******/
+
+
 const years = [1990, 1987, 1965, 1938];
 
 
@@ -146,7 +144,7 @@ const years = [1990, 1987, 1965, 1938];
 
 var ages5 = years.map(function(el) {
     return 2018 - el;
-});
+}); 
 
 console.log(ages5);
 
@@ -172,61 +170,60 @@ ages6 = years.map((el, index) => {
 });
 
 console.log(ages6);
-*/
 
 
 
-////////////////////////////////Lecture: Arrow functions: Lexical 'This' keyword
+/****** LECTURE: Arrow functions: Lexical 'This' keyword ******/
 
 //Arrow functions do no have the 'this' keyword
 
 //ES5
 
-// var box5 = {
-//     color: 'green',
-//     position: 1, 
-//     clickMe: function() {
-//         var self = this;
-//         document.querySelector('.green').addEventListener('click', function() {
-//             var str = 'This is box number ' + self.position + ' and it is ' + self.color;
-//             alert(str);
-//         });
-//     }
-// }
+var box5 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        var self = this;
+        document.querySelector('.green').addEventListener('click', function () {
+            var str = 'This is box number ' + self.position + ' and it is ' + self.color;
+            alert(str);
+        });
+    }
+}
 
-// box5.clickMe();
+box5.clickMe();
 
 //methods 'this' will point to the object, 'this' in a regular function points to global object - window
 
 //ES6
 
-// const box6 = {
-//     color: 'green',
-//     position: 1, 
-//     clickMe: function() {
-//         document.querySelector('.green').addEventListener('click', () => {
-//             var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-//             alert(str);
-//         });
-//     }
-// }
+const box6 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+            alert(str);
+        });
+    }
+}
 
-// box6.clickMe();
+box6.clickMe();
 
-//When you want to preserve the value of the 'this' keyword, use Arrow functions!!!
+//When you want to preserve the value of the 'this' keyword, use Arrow functions
 
-// const box66 = {
-//     color: 'green',
-//     position: 1, 
-//     clickMe: () => {
-//         document.querySelector('.green').addEventListener('click', () => {
-//             var str = 'This is box number ' + this.position + ' and it is ' + this.color;
-//             alert(str);
-//         });
-//     }
-// }
+const box66 = {
+    color: 'green',
+    position: 1,
+    clickMe: () => {
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = 'This is box number ' + this.position + ' and it is ' + this.color;
+            alert(str);
+        });
+    }
+}
 
-// box66.clickMe();
+box66.clickMe();
 
 //This example above returns undefined values because the arrow function in the main method now shares the 'this' keyword with the outer surroundings,
 //in this case the global scope/window object
@@ -235,29 +232,29 @@ console.log(ages6);
 
 
 //ES5
-// function Person(name) {
-//     this.name = name;
-// };
-
-// Person.prototype.myFriends5 = function(friends) {
-
-//     var arr = friends.map(function(el){
-//         return this.name + ' is friends with ' + el;
-//     }.bind(this));
-//     console.log(arr);
-// }
-
-// var friends = ['Bob', 'Jane', 'Mark'];
-
-// new Person('John').myFriends5(friends);
-
-//ES6
-/*
 function Person(name) {
     this.name = name;
 };
 
-Person.prototype.myFriends6 = function(friends) {
+Person.prototype.myFriends5 = function (friends) {
+
+    var arr = friends.map(function (el) {
+        return this.name + ' is friends with ' + el;
+    }.bind(this));
+    console.log(arr);
+}
+
+var friends = ['Bob', 'Jane', 'Mark'];
+
+new Person('John').myFriends5(friends);
+
+//ES6
+
+function Person(name) {
+    this.name = name;
+};
+
+Person.prototype.myFriends6 = function (friends) {
 
     var arr = friends.map(el => `${this.name} is friends with ${el}`);
 
@@ -268,20 +265,18 @@ Person.prototype.myFriends6 = function(friends) {
 var friends = ['Bob', 'Jane', 'Mark'];
 
 new Person('John').myFriends6(friends);
-*/
 
 
-////////////////////////////////Lecture: Destructuring
+/****** LECTURE: Destructuring ******/
 
 //ES5
 
-//var john = ['John', 31];
+var john = ['John', 31];
 
-//var name = john[0];
-//var age = john[1];
+var name = john[0];
+var age = john[1];
 
 //ES6
-/*
 const [name, age] = ['John', 26];
 console.log(name);
 console.log(age);
@@ -291,31 +286,31 @@ const obj = {
     lastName: 'Mendes'
 }
 
-const {firstName, lastName} = obj;
+const { firstName, lastName } = obj;
 
 console.log(firstName);
 console.log(lastName);
 
-const {firstName: a, lastName: b} = obj;
+const { firstName: a, lastName: b } = obj;
 
 console.log(a);
 console.log(b);
 
-*/
+//RETURN MULTIPLE VALUES FROM A FUNCTION
 
-// function calcAgeRetirement(year) {
-//     const age = new Date().getFullYear() - year; 
-//     return [age, 65 - age];
-// }
+function calcAgeRetirement(year) {
+    const age = new Date().getFullYear() - year;
+    return [age, 65 - age];
+}
 
-// const [age, retirement] = calcAgeRetirement(1987);
+const [age, retirement] = calcAgeRetirement(1987);
 
-// console.log(age);
-// console.log(retirement);
+console.log(age);
+console.log(retirement);
+
+/****** LECTURE: Arrays ******/
 
 
-////////////////////////////////Lecture: Arrays 
-/*
 const boxes = document.querySelectorAll('.box');
 
 
@@ -323,17 +318,17 @@ const boxes = document.querySelectorAll('.box');
 
 var boxesArr5 = Array.prototype.slice.call(boxes);
 
-boxesArr5.forEach(function(cur) {
+boxesArr5.forEach(function (cur) {
     cur.style.backgroundColor = 'dodgerblue';
 });
 
-*/
+
 
 //ES6
-/*
- const boxesArr6 = Array.from(boxes);
 
-Array.from(boxes).forEach( cur => cur.style.backgroundColor = 'dodgerblue');
+const boxesArr6 = Array.from(boxes);
+
+Array.from(boxes).forEach(cur => cur.style.backgroundColor = 'dodgerblue');
 
 //ES5
 
@@ -363,7 +358,7 @@ for (const cur of boxesArr6) {
 
 var ages = [12, 17, 8, 21, 14, 11];
 
-var full = ages.map(function(cur) {
+var full = ages.map(function (cur) {
     return cur >= 18;
 });
 
@@ -375,13 +370,13 @@ console.log(ages[full.indexOf(true)]);
 
 //ES6
 
-console.log(ages.findIndex( cur => cur >= 18));
+console.log(ages.findIndex(cur => cur >= 18));
 console.log(ages.find(cur => cur >= 18));
 
-*/
 
-////////////////////////////////Lecture: The Spread Operator
-/*
+
+/****** LECTURE: The Spread Operator ******/
+
 function addFourAges(a, b, c, d) {
     return a + b + c + d;
 }
@@ -399,7 +394,8 @@ console.log(sum2);
 
 //ES6
 
-// The spread operator takes the values from the array and sets then as the arguments for the function call
+// The spread operator takes the values from the array and sets them as the arguments for the function call
+//Spread is used in a function call. 
 
 const sum3 = addFourAges(...ages);
 console.log(sum3);
@@ -417,24 +413,27 @@ const boxes = document.querySelectorAll('.box');
 const all = [h, ...boxes];
 
 Array.from(all).forEach(cur => cur.style.color = 'purple');
-*/
 
-////////////////////////////////Lecture: Rest Parameters
-/*
+
+/****** LECTURE: Rest Parameters ******/
+
 //ES5
 
 function isFullAge5() {
     //console.log(arguments);
     var argsArr = Array.prototype.slice.call(arguments);
 
-    argsArr.forEach(function(cur) {
+    argsArr.forEach(function (cur) {
         console.log((2018 - cur) >= 18);
     });
 }
 
-// isFullAge5(1990, 1987, 1999, 2015, 2014);
+isFullAge5(1990, 1987, 1999, 2015, 2014);
 
 //ES6
+
+//Rest is the same syntax as Spread - it takes the arguments and converts them into a single array
+//Rest operator is used in a function declaration
 
 function isFullAge6(...years) {
     years.forEach(cur => console.log((2018 - cur) >= 18));
@@ -442,20 +441,20 @@ function isFullAge6(...years) {
 
 isFullAge6(1990, 1987, 1999, 2015, 2014);
 
-*/
+
 
 //ES5
-/*
+
 function isFullAge5(limit) {
     //console.log(arguments);
     var argsArr = Array.prototype.slice.call(arguments, 1);
     //console.log(argsArr);
-    argsArr.forEach(function(cur) {
+    argsArr.forEach(function (cur) {
         console.log((2018 - cur) >= limit);
     });
 }
 
- isFullAge5(21, 1990, 1987, 1999, 2015, 2014);
+isFullAge5(21, 1990, 1987, 1999, 2015, 2014);
 
 //ES6
 
@@ -464,39 +463,39 @@ function isFullAge6(limit, ...years) {
 }
 
 isFullAge6(50, 1990, 1987, 1999, 2015, 2014);
-*/
 
-////////////////////////////////Lecture: Default Parameters
+
+/****** LECTURE: Default Parameters ******/
 
 //ES5
 
-// function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
+function SmithPerson(firstName, yearOfBirth, lastName, nationality) {
 
-//     lastName === undefined ? lastName = 'Smith' : lastName = lastName;
-//     nationality === undefined ? nationality = 'American' : nationality = nationality;
+    lastName === undefined ? lastName = 'Smith' : lastName = lastName;
+    nationality === undefined ? nationality = 'American' : nationality = nationality;
 
-//     this.firstName = firstName;
-//     this.yearOfBirth = yearOfBirth;
-//     this.lastName = lastName;
-//     this.nationality = nationality;
-// }
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
 
 //ES6
 
-// function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'American') {
-//     this.firstName = firstName;
-//     this.yearOfBirth = yearOfBirth;
-//     this.lastName = lastName;
-//     this.nationality = nationality;
-// }
+function SmithPerson(firstName, yearOfBirth, lastName = 'Smith', nationality = 'American') {
+    this.firstName = firstName;
+    this.yearOfBirth = yearOfBirth;
+    this.lastName = lastName;
+    this.nationality = nationality;
+}
 
-// var john = new SmithPerson('John', 1990, 'Mendes');
-// var emily = new SmithPerson('Emily', 1993, 'Diaz', 'spanish');
+var john = new SmithPerson('John', 1990, 'Mendes');
+var emily = new SmithPerson('Emily', 1993, 'Diaz', 'spanish');
 
 
 
-////////////////////////////////Lecture: Maps
-/*
+/****** LECTURE: Maps ******/
+
 const question = new Map();
 
 question.set('question', 'What is the official name of the latest major Javascript version?');
@@ -519,40 +518,40 @@ question.set(false, 'Wrong, please try again!');
 console.log(question.get('question'));
 console.log(question.size);
 
-// if (question.has(4)) {
-//     // question.delete(4);  
-//     console.log('Answer 4 is here');
-// }
+if (question.has(4)) {
+    // question.delete(4);  
+    console.log('Answer 4 is here');
+}
 
-// question.clear();
+question.clear(); //deletes all keys from map
 
 
 
-// question.forEach((value, key) => {
-//     console.log(`This is ${key} set to ${value}`)
-// });
+question.forEach((value, key) => {
+    console.log(`This is ${key} set to ${value}`)
+});
 
 for (let [key, value] of question.entries()) {
-    if (typeof(key) === 'number') {
+    if (typeof (key) === 'number') {
         console.log(`Answer ${key}: ${value}`);
     }
 }
 const ans = parseInt(prompt('Write the correct answer'));
 
 console.log(question.get(ans === question.get('correct')));
-*/
 
-////////////////////////////////Lecture: Classes
+
+/****** LECTURE: Classes ******/
 
 //ES5
-/*
-var Person5 = function(name, yearOfBirth, job) {
+
+var Person5 = function (name, yearOfBirth, job) {
     this.name = name;
     this.yearOfBirth = yearOfBirth;
     this.job = job;
 }
 
-Person5.prototype.calculateAge = function() {
+Person5.prototype.calculateAge = function () {
     var age = new Date().getFullYear - this.yearOfBirth;
     console.log(age);
 }
@@ -562,7 +561,7 @@ var john5 = new Person5('John', 1987, 'PM');
 //ES6 
 
 class Person6 {
-    constructor (name, yearOfBirth, job) {
+    constructor(name, yearOfBirth, job) {
         this.name = name;
         this.yearOfBirth = yearOfBirth;
         this.job = job;
@@ -581,14 +580,14 @@ class Person6 {
 const john6 = new Person6('John', 1987, 'DPM');
 
 Person6.greeting();
-*/
 
-////////////////////////////////Lecture: Classes and subclasses
+
+/****** LECTURE: Classes and Sub-Classes ******/
 
 
 //ES5
-/*
-var Person5 = function(name, yearOfBirth, job) {
+
+var Person5 = function (name, yearOfBirth, job) {
     this.name = name;
     this.yearOfBirth = yearOfBirth;
     this.job = job;
@@ -596,12 +595,12 @@ var Person5 = function(name, yearOfBirth, job) {
 
 
 
-Person5.prototype.calculateAge = function() {
+Person5.prototype.calculateAge = function () {
     var age = new Date().getFullYear() - this.yearOfBirth;
     console.log(age);
 }
 
-var Athlete5 = function(name, yearOfBirth, job, olympicGames, medals) {
+var Athlete5 = function (name, yearOfBirth, job, olympicGames, medals) {
     Person5.call(this, name, yearOfBirth, job);
     this.olympicGames = olympicGames;
     this.medals = medals;
@@ -611,7 +610,7 @@ var Athlete5 = function(name, yearOfBirth, job, olympicGames, medals) {
 
 Athlete5.prototype = Object.create(Person5.prototype);
 
-Athlete5.prototype.wonMedal = function() {
+Athlete5.prototype.wonMedal = function () {
     this.medals++;
     console.log(this.medals);
 }
@@ -625,7 +624,7 @@ johnAthlete5.wonMedal();
 //ES6
 
 class Person6 {
-    constructor (name, yearOfBirth, job) {
+    constructor(name, yearOfBirth, job) {
         this.name = name;
         this.yearOfBirth = yearOfBirth;
         this.job = job;
@@ -638,7 +637,7 @@ class Person6 {
 }
 
 class Athlete6 extends Person6 {
-    constructor (name, yearOfBirth, job, olympicGames, medals) {
+    constructor(name, yearOfBirth, job, olympicGames, medals) {
         super(name, yearOfBirth, job)
         this.olympicGames = olympicGames;
         this.medals = medals;
@@ -653,45 +652,44 @@ const johnAthlete6 = new Athlete6('John', 1987, 'Swimmer', 3, 10);
 
 johnAthlete6.wonMedal();
 johnAthlete6.calculateAge();
-*/
 
 
 
-////////////////////////////// ES6 Challenge: My Solution
+/****** LECTURE: ES6 Challenge: My Solution ******/
+
 /*
-
 Ideas:
--super class of town
+-Super class of town
 -Create a park sub class - name/year/#ofTrees/parkArea
 -Create a street sub class - name/year/length/sizeClass (default is normal)
 -Map of all parks and map of all streets?
--create 3 parks and 4 streets with new keyword
--give classes specific functions
+-Create 3 parks and 4 streets with new keyword
+-Give classes specific functions
 */
 
 class Town {
-    
+
     constructor(name, yearBuilt) {
         this.name = name;
         this.yearBuilt = yearBuilt;
         this.parks = []
         this.streets = [];
     }
-    
+
     calculateAvgAge() {
         //park obj {stuff}
         let allParks = this.parks;
         let avgAge = 0;
-        allParks.forEach( (el) => {
+        allParks.forEach((el) => {
             avgAge += el.calculateAge();
         });
         avgAge = (avgAge / allParks.length);
-        console.log (`Our ${allParks.length} parks have an average age of ${avgAge} years.`);
+        console.log(`Our ${allParks.length} parks have an average age of ${avgAge} years.`);
     }
 
     treeDensity() {
         let allParks = this.parks;
-        allParks.forEach( (el) => {
+        allParks.forEach((el) => {
             console.log(`${el.name} has a tree density of ${el.calculateDensity()} trees per square km.`);
         });
     }
@@ -700,7 +698,7 @@ class Town {
         let allParks = this.parks;
         let parkWithMostTrees;
         let treeArr = [];
-        allParks.forEach( (el) => {
+        allParks.forEach((el) => {
             if (el.numberOfTrees > 1000) {
                 treeArr.push(el.numberOfTrees);
             }
@@ -708,19 +706,19 @@ class Town {
 
         parkWithMostTrees = Math.max(...treeArr);
 
-        allParks.forEach( (el) => {
+        allParks.forEach((el) => {
             if (el.numberOfTrees === parkWithMostTrees) {
                 parkWithMostTrees = el;
             }
         });
-            console.log(`${parkWithMostTrees.name} has more than 1000 trees.`);
+        console.log(`${parkWithMostTrees.name} has more than 1000 trees.`);
     }
 
     calculateStreetLength() {
         let allStreets = this.streets;
         let totalLength = 0;
         let avgLength = 0;
-        allStreets.forEach( (el) => {
+        allStreets.forEach((el) => {
             totalLength += el.length;
         });
         avgLength = (totalLength / allStreets.length);
@@ -729,7 +727,7 @@ class Town {
 
     getStreetInfo() {
         let allStreets = this.streets;
-        allStreets.forEach( (el) => {
+        allStreets.forEach((el) => {
             console.log(`${el.name}, built in ${el.yearBuilt}, is a ${el.size} street.`);
         });
     }
@@ -738,13 +736,13 @@ class Town {
 
 
 class Park extends Town {
-    constructor(name, yearBuilt, numberOfTrees = 0, parkArea ) {
+    constructor(name, yearBuilt, numberOfTrees = 0, parkArea) {
         super(name, yearBuilt);
         this.numberOfTrees = numberOfTrees;
         this.parkArea = parkArea;
     }
 
-    
+
     calculateDensity() {
         let density = (this.numberOfTrees / this.parkArea);
         return density;
@@ -799,7 +797,8 @@ printStreetsReport(town1);
 
 
 
-///////////////////////////////JONAS SOLUTION
+
+/****** LECTURE: ES6 Challenge: Course Solution ******/
 
 
 class Element {
@@ -839,15 +838,15 @@ class Street extends Element {
     }
 }
 
-const allParks = [new Park('Green Park', 1987, 0.2, 215), new Park('National Park, 1894', 2.9, 3541), 
+const allParks = [new Park('Green Park', 1987, 0.2, 215), new Park('National Park, 1894', 2.9, 3541),
 new Park('Oak Park', 1953, 0.4, 949)];
 
-const allStreets = [new Street('Ocean Avenue', 1999, 1.1, 4), new Street('Evergreen', 2008, 2.7, 2), 
+const allStreets = [new Street('Ocean Avenue', 1999, 1.1, 4), new Street('Evergreen', 2008, 2.7, 2),
 new Street('4th Street', 2015, 0.8), new Street('Sunset Boulevard', 1982, 2.5, 5)];
 
 
 function calc(arr) {
-    
+
     const sum = arr.reduce((prev, cur, index) => prev + cur, 0);
 
     return [sum, sum / arr.length];
@@ -857,24 +856,24 @@ function calc(arr) {
 
 function reportParks(p) {
 
-        console.log('----PARKS REPORT----');
-        //Density
+    console.log('----PARKS REPORT----');
+    //Density
 
-            p.forEach(el => el.treeDensity());
-
-
-        //Average Age
-        const ages = p.map(el => new Date().getFullYear() - el.buildYear);
-        const [totalAge, avgAge] = calc(ages);
-        //[totalAge, avgAge] = [sum, sum / arr.length]; DESTRUCTURING
-        console.log(`Our ${p.length} have an average of ${avgAge} years.`);
+    p.forEach(el => el.treeDensity());
 
 
+    //Average Age
+    const ages = p.map(el => new Date().getFullYear() - el.buildYear);
+    const [totalAge, avgAge] = calc(ages);
+    //[totalAge, avgAge] = [sum, sum / arr.length]; DESTRUCTURING
+    console.log(`Our ${p.length} have an average of ${avgAge} years.`);
 
-        //Which Park has more than 1000 trees
 
-        const i = p.map(el => el.numTrees).findIndex( el => el >= 1000);
-        console.log(`${p[i].name} has more than 1000 trees`);
+
+    //Which Park has more than 1000 trees
+
+    const i = p.map(el => el.numTrees).findIndex(el => el >= 1000);
+    console.log(`${p[i].name} has more than 1000 trees`);
 }
 
 function reportStreets(s) {
